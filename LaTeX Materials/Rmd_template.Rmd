@@ -1,0 +1,65 @@
+---
+title: "An Rmarkdown Template"
+author: A Name
+date: Fall 2016
+output: pdf_document
+---
+
+If you are viewing this document in RStudio, you will see some odd text above this paragraph.[^1] Rmarkdown documents start with something called a "yaml header." That's all the bits included between the two lines of dashes above. What goes in there will set some preferences for your document, including what kind of document you will produce. Some of this information will be printed (like the title and author), but it will not appear in that wacky format.
+
+We can use markdown text here. You can make text *italic* and
+**bold**. Rmarkdown does not care about spacing between words of after
+sentences.                  See? This looks just       fine when you
+output a PDF document.
+
+New paragraphs require an empty line. In order to output a pdf
+document, you need to install the `rmarkdown` package in R.
+
+```{r, eval=FALSE}
+install.packages("rmarkdown")
+```
+
+Once you've done that, you can turn the .Rmd document into a pdf file
+with the following command in R:
+
+```{r, eval=FALSE}
+rmarkdown::render("your-document-name.Rmd")
+```
+
+If you're using RStudio, you can click the "knit" button, which
+accomplishes the same thing. Note that you will need \LaTeX~ installed
+in order to make a pdf.
+
+Once we've done that, you can use rmarkdown to include R code easily
+in your problem sets: 
+
+```{r}
+x <- 1:1570
+
+mean(x)
+```
+
+These r "chunks" can take options. So, for example, because I didn't
+want to evaluate the installation or render chunks above, I added
+`eval=FALSE` to those options.
+
+We can also take advantage of \LaTeX 's "math mode." For example,
+inline math can be included between two dollar signs $x=3$ like
+this. Or we can use display math between double dollar signs:
+
+$$\bar{x} = \dfrac{1}{n} \sum_{i=1}^n x_i$$
+
+Other things like lists are really easy
+
+1. We can do numbered lists
+2. And a second item
+
+* We can also do unnumbered lists
+    + Use two tabs before the "+" to get subitems
+
+You can find much more information about how all of this works on
+rmarkdown's website [here](http://rmarkdown.rstudio.com/)
+
+As suggested by the discussion above, Rmarkdown relies on \LaTeX to produce output. While rmarkdown is probably the fastest way to integrate code, calculated values, and regular text into a single document, understanding how to use \LaTeX itself has a number of long-term advantages. 
+
+[^1]: This document was first written by Alex Branham and revised and expanded by Brendan Apfeld.

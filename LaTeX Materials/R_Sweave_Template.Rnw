@@ -1,0 +1,124 @@
+\documentclass{article}
+%\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{letterpaper} 
+\geometry{margin=1in}
+
+\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{amssymb} %maths
+\usepackage{amsmath} %maths
+\usepackage{float}
+% These packages are all incorporated in the memoir class to one degree or another...
+
+
+\title{Sample Title}
+\author{A. Uthor}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+%%% The main document begins here %%%
+\begin{document}
+\maketitle
+
+\section{Welcome to \LaTeX}
+\LaTeX documents contain two parts. Everything above the \texttt{\textbackslash begin\{document\}} line is called the ``preamble.'' It contains commands specifying for setting up the document and loads packages that \TeX will use to determine how to handle the commands you put in your document.  
+
+Many people find \LaTeX difficult to use because it is \emph{very} particular about some things that are not necessarily intuitive. But the advantage to using it is that you can make a document look precisely how you want it to look and once you get over the learning curve, it is much faster to achieve these results than using Word. You can also easily incorporate mathematical formulas, incorporate formatting guidelines (like those the college requires for your dissertation), and, with a little tweak, simultaneously when you create your document!
+
+\section{Getting Started}
+How things get printed and how commands function depend on the \emph{mode} that you're working in. Generally, we think about text mode and math mode.\footnote{Okay, technically text mode is one of paragraph mode or LR mode, but that's not terribly important for our purposes.} Text mode exists by default and you'll have to tell the program to switch to math mode to get most math-related things to work.  There are a variety of ways to enter into math mode.  The simplest is to use a pair of dollar signs, where everything between them is inserted in-line with the text.\footnote{Thus, this is called in-line math mode.}  The alternative is to use ``display'' math mode, where equations are separated from the text, centered, and numbered (by default, though you can change that).  Common options include \texttt{\textbackslash [ \textbackslash ]} and \texttt{\textbackslash begin\{align\} \textbackslash end\{align\}}.  Note that in all of these cases you must also tell \LaTeX to \textbf{exit} math mode again or it will get angry and will not work.
+
+\subsection{Some Common Math Stuff}
+\[
+\lim_{n \to \infty} \bar X_n = \frac{1}{n} \prod_{i=1}^n \hat X_i + \sum_{i=1}^{n-2}X^{3n}
+\]
+
+\begin{align}
+x^2 &= 2x + 5\\
+x &= \sqrt{2x+5}\\
+& \approx 4.98
+\end{align}
+
+\begin{align*}
+f_x(x) & =
+\begin{cases}
+0 & \text{if } x < 5\\
+1 & \text{if } 1 \leq x < 10\\
+\frac{1}{7} & \text{otherwise}
+\end{cases}
+\end{align*}
+
+\begin{equation}
+\label{eq:integral_with_frac}
+\int_{-\infty}^\infty \frac{2x^5}{e} dx
+\end{equation}
+
+And here is an example of in-line equations: $\lambda \sim (2)$ and $\theta \in [0,1]$.
+
+One of the advantages of \LaTeX is that it builds internal references to things like footnotes and equations and updates the numbering automatically if you move them around.  You can reference your work easily too.  See, for example, Equation \ref{eq:integral_with_frac}.
+
+\section{Pecularities}
+This is a very incomplete list of pecularities about \LaTeX. 
+\begin{enumerate}
+  \item The program will generate a number of related files when you compile that it needs to run, but you do not need to keep afterwards. You should obviously keep your .tex file and the .pdf output. Everything else can be deleted if you want, though it has the potential to slow down compiling the next time. There are times when you encounter an error when you compile and you will need to remove the extra files. In these cases, your compiler will probably prompt you to do this. Conversely, if you compile an Sweave document from within RStudio, these files will be deleted automatically.
+  \item If you have any references in your document (e.g. to tables or equations) you will need to compile your document two times for them to work. If you don't you'll see a \textbf{?} anywhere you should have a reference number. This happens because the program will create a .aux file the first time it runs and then refers to that file the second time to fill in this information. Again, if you ``knit'' your file in RStudio, the program will run through as many times as are necessary to complete this process for you.
+  \item Quotation marks will, by default, show up like "this," which is not desirable. The best way to avoid this is to use a double back tick at the front and then a double apostrophe at the end. Some programs (e.g. TeXworks) will automatically fill in the correct characters when you hit the quotation mark button. ``Problem solved!''
+  \item Use two returns to start a new paragraph, otherwise the program will treat it the same as a space.
+  \item \emph{Except} if you are in a table or in display math mode, in which use \texttt{\textbackslash\textbackslash}
+  \item Put a \texttt{\textbackslash} in front of non-punctuation symbols to insert them in the text, because \LaTeX uses
+  \begin{enumerate}
+    \item \$ for math mode
+    \item \% for comments
+    \item \& for indicating alignment on tables and math equations
+    \item \{\} for command arguments
+  \end{enumerate}
+  \item Some commands differ between math and text mode
+\end{enumerate}
+
+\section{Some Variations}
+A regular \LaTeX file is just plain text and does not calculate anything for you. It just translates the commands in the file into some kind of output on a pdf page. 
+
+RStudio allows you to use a modified type of \TeX file with the extension ``.Rnw.'' It works just like regular \LaTeX, but it also allows you to include ``chunks'' of R code that can be evaluated when you ``knit'' the document. Everything in this document outisde of this section can be put into a regular .tex file and will produce a pdf.
+
+<<setup, echo = FALSE, include=FALSE>>=
+library(dplyr)
+options(digits = 2)
+@
+
+R code is included in the document in code chunks, which are given names and sometimes options. R creates your document in a new environment, so this means that any packages you have loaded, along with any data our output needs to be generated again within the document for it to work.\footnote{Alternatively, you could save everything as a .Rdata file and just load that, but that often defeats the purpose of this approach.}
+
+Chunks start with \texttt{<< >>=} and end with \texttt{@}. Everything in between follows R rules, not \LaTeX rules. You can also create a chunk by clicking on the button above the source window with the c in a green box and the orange right-pointing arrow.
+
+<<some_chunk>>=
+mtcars %>% 
+  filter(wt < 4) %>% # select only rows where wt < 4
+  group_by(cyl) %>% 
+  summarize(meanmpg = mean(mpg))
+@
+
+We can also display output without the code that produced it:
+<<some_other_chunk, echo=FALSE>>=
+x <- 1:5
+for (i in 1:10){ # do something 10 times, call the iteration i
+  x <- x + 1 # reassign x adding 1 to each element
+  print(x) # print the result --- loops only return something if you tell them to!
+}
+@
+
+We can also calculate some value in the chunk, then call its output somewhere else. For example,
+<<value_here_output_there, include=FALSE>>=
+my_val <- mtcars %>% 
+  filter(cyl >= 6) %>% 
+  select(wt) %>% 
+  summarize(m = mean(wt))
+@
+
+And now we can see our value is \Sexpr{my_val[[1]]}. Actually, that's an approximate value. Note that the first chunk  where we include all the packages and whatever else we need (which we didn't print in the output) includes the line \texttt{options(digits = 2)}.
+
+\end{document}

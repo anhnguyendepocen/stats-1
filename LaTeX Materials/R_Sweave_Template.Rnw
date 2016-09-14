@@ -1,5 +1,5 @@
 \documentclass{article}
-%\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
 
 %%% PAGE DIMENSIONS
 \usepackage{geometry} % to change the page dimensions
@@ -99,7 +99,8 @@ Chunks start with \texttt{<< >>=} and end with \texttt{@}. Everything in between
 mtcars %>% 
   filter(wt < 4) %>% # select only rows where wt < 4
   group_by(cyl) %>% 
-  summarize(meanmpg = mean(mpg))
+  summarize(meanmpg = mean(mpg)) %>% 
+  as.data.frame()
 @
 
 We can also display output without the code that produced it:

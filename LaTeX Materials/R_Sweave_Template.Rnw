@@ -81,6 +81,8 @@ This is a very incomplete list of pecularities about \LaTeX.
   \item Some commands differ between math and text mode
 \end{enumerate}
 
+There are times when you might want to manually add space to a document. To add a page break, just use the code \texttt{\textbackslash clearpage}. To add blank space (for example, if you want to draw something in your Stats homework by hand), you can use \texttt{\textbackslash vspace\{2 in\}}. Obviously, you can change the amount of space you add. You can also repace the ``v'' with an ``h'' for horizontal space, though that is usually only useful in math mode or in tables.
+
 \section{Some Variations}
 A regular \LaTeX file is just plain text and does not calculate anything for you. It just translates the commands in the file into some kind of output on a pdf page. 
 

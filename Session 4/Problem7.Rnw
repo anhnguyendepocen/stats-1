@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{letterpaper} 
+\geometry{margin=1in}
+
+\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{amssymb} %maths
+\usepackage{amsmath} %maths
+\usepackage{float}
+% These packages are all incorporated in the memoir class to one degree or another...
+
+
+\title{Integrating to Find the CDF of a Uniform Distribution}
+\author{Brendan Apfeld}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+%%% The main document begins here %%%
+\begin{document}
+\maketitle
+
+Suppose we have a random variable $X \sim U(-2,4)$.
+
+<<setup, echo = FALSE, include = FALSE>>=
+library(ggplot2)
+@
+<<plot_uniform, echo = FALSE, fig.width=3.5, fig.height=2.5, fig.align='center'>>=
+x <- seq(-5,7, length = 1000)
+fx <- dunif(x, -2, 4)
+ggplot() +
+  geom_line(aes(x, fx)) +
+  labs(x = "x", y = expression(f[X](x)))
+@
+
+Our pdf is going to be
+
+\begin{align*}
+f_X(x) &=
+\begin{cases}
+\frac{1}{6} & \text{if } -2 \leq x \leq 4\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+To find the CDF, let's recall that the CDF is $F_X(x) = Prob(X\leq x)$. In words, it's the probablity that the random variable is less than or equal to some value $t$. With a uniform distribution, we know that the probabiliy below the lower parameter is 0. We also know that the total probability must equal 1, so above the upper bound, the CDF must be 1. (In other words, there is a 100\% chance that the random variable is less than or equal to a value greater than the upper parameter.) So we already have:
+
+\begin{align*}
+F_X(x) &=
+\begin{cases}
+0 & \text{if } x < -2\\
+? & \text{if } -2\leq x \leq 4\\
+1 & \text{if } x >4
+\end{cases}
+\end{align*}
+
+All we have to do to determine the CDF for the interval of interest. To find the CDF of a continuous random variable, we integrate \textbf{from $-\inf$ to x}. Since we have already defined the CDF from $-\inf$ to -2, we will integrate from -2 to $x$.  Thus,
+
+\begin{align*}
+\int_{-2}^x f_X(x)dx &= \int_{-2}^x \frac{1}{6}dx\\
+&= \frac{x}{6}\bigg|_{-2}^x\\
+&= \frac{x}{6}-\frac{-2}{6}\\
+&= \frac{x+2}{6}\\
+\end{align*}
+
+Our complete CDF is:
+
+\begin{align*}
+F_X(x) &=
+\begin{cases}
+0 & \text{if } x < -2\\
+\frac{x+2}{6} & \text{if } -2\leq x \leq 4\\
+1 & \text{if } x >4
+\end{cases}
+\end{align*}
+
+
+\end{document}

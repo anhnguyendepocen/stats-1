@@ -98,7 +98,7 @@ hist(bern.sims30, freq = FALSE, main = "Mean of 30 Draws from Bern(.5)",
      breaks=((0:30)+.5)/30)
 #dev.off()
 # what are mean and sd of average of 30 Bern(.5)s?
-curve(dnorm(x, mean= , sd= , add=TRUE, col="green", lwd = 2)
+curve(dnorm(x, mean= , sd= ), add=TRUE, col="green", lwd = 2)
 
 
 

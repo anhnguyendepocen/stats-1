@@ -1,0 +1,123 @@
+---
+title: "Getting Data into R"
+author: "Brendan Apfeld"
+date: "October 14, 2016"
+documentclass: utbeamerlite
+output: beamer_presentation
+classoption: aspectratio=1610
+fontsize: bigger
+---
+# A Quick R Refresher
+## Packages
+* R is super useful, but we supplement its functionality with *packages*
+* You install packages (assuming they're in the normal place) using `install.packages("package_name")`
+    + You only have to install a package once (though you may need to update it later)
+* You have to *load* packages every time you start an R session
+    + Load a package in R by using `library(package_name)`
+        * Note there are no quotation marks there
+    + Loading a package makes all of its functions available to you
+    + If you don't need that, you can also do `package_name::function()`
+        * E.g. (that we'll see in a second) `rio::import("file_name.csv")`
+
+## Objects and Operators
+* Pretty much *everything* in R is an object
+    + Which is probably why it's an "OO," or "object-oriented" language
+* You "assign" objects to names in R using the ` <- ` operator
+
+
+# Data Sources
+## Online
+* Sometimes you'll have a direct link to a csv or txt file
+* Other online data may be accessed through an api (and an R package)
+* Advantages: potentially easy, "cutting edge data"
+* Disadvantages: might change/disappear, often slow
+
+## On Disk
+* More often, you'll have some kind of data file on disk
+* Advantages: fast, it shouldn't disappear
+* Disadvantages: you can break it
+
+# Data Types
+## Common Data File Formats
+* Spreadsheet-style
+    + .xlsx or .xls (Excel)
+    + .ods (OpenDocument)
+    + Google Sheets
+* Proprietary Formats
+    + .dta (Stata)
+    + .sav (SPSS)
+    + .xpt (SAS)
+    + .Rdata (R)
+* Plain Text Data Formats
+    + .csv (our good friend)
+    + .dat (not very common)
+    + .json
+    + .xml
+
+# Getting Data into R
+## The (Bad) Old Days
+* `read.csv()` or `readr::read_csv()`
+* `gdata::read.xls()`
+* `foreign::read.dta()` or `haven::read_dta()`
+* Which one should I use?
+    + Depended on the version of the program used to create the data
+    + Each package required different arguments
+    + You never really knew what to expect
+
+## One Import Package to Rule them All
+Then the `rio` package came along
+
+* Only two commands in the whole package: `rio::import()` and `rio::export()`
+* The only argument you *need* for it to work is the file name
+* Supports other arguments if you really *want* to change its defaults
+* You (almost) never need to change the defaults
+
+## Saving and Opening Rdata Files
+* R has its own data format that ends in .Rdata
+    + Super compressed
+    + Saves and loads quickly
+* Save with `save(objects, file = "filename.Rdata")`
+* Load with `load("filename.Rdata")`
+
+## Examples with Data on Disk
+ Examples in R
+
+## Examples with Data Online
+* Can be as simple as 
+
+```wunderground <- read.csv("https://www.wunderground.com/history/airport/ZBAA
+/2013/1/1/DailyHistory.html?format=1")```
+
+* The list of possibilities for APIs is far to great to include here
+* For an example using the World Bank data API and the corresponding `wbstats` package, check out my [shameless self-promotion](http://brendanapfeld.com/workflow/2016/09/27/wbstats/)
+
+# Visualizing Data
+## Visualizing Datasets
+* Datasets are often large and unwieldy
+* There are a number of ways to easily learn something about them
+```{r}
+mtcars <- rio::import("mtcars.csv") 
+mtcars # a lot of times this is too much for the console
+```
+
+## Visualizing Datasets
+```{r}
+str(mtcars) # look at the structure of the data
+```
+
+## Visualizing Datasets
+```{r}
+names(mtcars) # get the names of the varibles in the dataframe
+head(mtcars) # print the first 6 lines
+```
+
+## R Also has a Viewer
+```{r}
+wg <- read.csv("https://www.wunderground.com/history/airport/ZBAA/2013/1/1/DailyHistory.html?format=1")
+# View(wg) # commented out because it won't run on a slide
+# note the capital "V"
+# Can also access by clicking on the object in the 
+# environment pane in RStudio
+```
+
+# Graphing - Back to R!

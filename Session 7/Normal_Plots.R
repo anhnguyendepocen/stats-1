@@ -3,15 +3,13 @@
 ##############################
 
 # Graphing some normal distributions
-x_vec <- seq(-4, 4, length = 500) # create a vector x from -4 to 4 that we'll input into our function
-
-plot(x = x_vec, y = dnorm(x_vec, mean = 0, sd = 1), type = 'l', lwd = 2) # create a plot where the x values are defined by our x vector and y values are the standard normal pdf values for those x
-curve(dnorm(x, mean = 0, sd = 0.5), col = "green", add = TRUE, lwd = 2) # add another normal curve with different parameters; we use curve() not plot() in order to add this new line; note that this is NOT the same x as above
+curve(dnorm(x, mean = 0, sd = 1), lwd = 2, xlim = c(-4, 4)) # create a plot of a standard normal curve from -4 to 4
+curve(dnorm(x, mean = 0, sd = 0.5), col = "green", add = TRUE, lwd = 2) # add another normal curve with different parameters; we use curve() not plot() in order to add this new line
 curve(dnorm(x, mean = 0, sd = .1), col = "red", add = T, lwd = 2)
 
 # same thing as above, but here we'll set set the y limit so we can see all three curves
-plot(x, dnorm(x, mean = 0, sd = 1), type = 'l', lwd = 2, ylim = c(0, 3.75))
-curve(dnorm(x, mean = 0, sd = 0.5), col = "green", add = TRUE, lwd = 2) # note, this is NOT the same x as above
+curve(dnorm(x, mean = 0, sd = 1), lwd = 2, xlim = c(-4, 4), ylim = c(0, 3.75))
+curve(dnorm(x, mean = 0, sd = 0.5), col = "green", add = TRUE, lwd = 2)
 curve(dnorm(x, mean = 0, sd = .1), col = "red", add = T, lwd = 2)
 
 # Another way to solve this problem

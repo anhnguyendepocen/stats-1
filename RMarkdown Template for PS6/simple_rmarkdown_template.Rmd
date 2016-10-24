@@ -7,10 +7,16 @@ output: pdf_document
 
 Put your code in the section below (and probably edit the title/author stuff above)
 
+To compile this, save the file somewhere (without any spaces in the name) and then click "Knit PDF" above to make a pdf. If it doesn't work, you may need to run `install.packages("rmarkdown")` in R first.
+
+Problem 1 can go here:
 ```{r}
 # your code here
 ```
 
-If it doesn't work, you may need to run `install.packages("rmarkdown")` in R first.
+And Problem 4 can go here:
+```{r}
+# your code here
+```
 
-To compile this, save the file somewhere (without any spaces in the name) and then click "Knit PDF" above to make a pdf.
+You can also change this text and answer other parts of this (or other) questions here if you like. (You can even us LaTeX commands if you want.)

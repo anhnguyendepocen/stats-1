@@ -12,3 +12,5 @@ Put your code in the section below (and probably edit the title/author stuff abo
 ```
 
 If it doesn't work, you may need to run `install.packages("rmarkdown")` in R first.
+
+To compile this, save the file somewhere (without any spaces in the name) and then click "Knit PDF" above to make a pdf.

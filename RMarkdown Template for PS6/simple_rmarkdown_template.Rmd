@@ -1,0 +1,14 @@
+---
+title: "An Rmarkdown Template"
+author: A Name
+date: Fall 2016
+output: pdf_document
+---
+
+Put your code in the section below (and probably edit the title/author stuff above)
+
+```{r}
+# your code here
+```
+
+If it doesn't work, you may need to run `install.packages("rmarkdown")` in R first.
